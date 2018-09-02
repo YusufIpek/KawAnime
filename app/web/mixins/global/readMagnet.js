@@ -21,12 +21,7 @@ export default {
         e.preventDefault()
 
         if (this.isClientPage) {
-          this.$axios.get('torrent/add', {
-            params: {
-              magnet: text,
-              path: '/Users/Kylart/Downloads'
-            }
-          })
+          this.$store.dispatch('torrents/addTorrent', text)
         } else {
           this.$store.commit('streaming/play', {
             show: true,

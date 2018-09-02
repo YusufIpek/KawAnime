@@ -33,16 +33,12 @@ export default {
       await this.$store.dispatch('torrents/getData')
     },
     async actOnTorrent (magnet, action) {
-      try {
-        await this.$axios.get('torrent/toggle', {
-          params: {
-            action,
-            magnet
-          }
-        })
+      await this.$store.dispatch('torrents/toggle', {
+        action,
+        magnet
+      })
 
-        this.getInfo()
-      } catch (e) { void e }
+      this.getInfo()
     }
   }
 }

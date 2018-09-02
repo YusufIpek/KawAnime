@@ -4,5 +4,8 @@ export default {
   },
   setClient (state, data) {
     state.client = data
+  },
+  setPath (state, data) {
+    state.cllient.path = data
   }
 }

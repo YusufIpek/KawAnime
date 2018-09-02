@@ -6,11 +6,21 @@ const logger = new Logger('Torrent Client')
 
 // TODO Limit download speed, check https://github.com/webtorrent/webtorrent/issues/163
 
+const cleanFiles = (files) => {
+  return files.map((file) => ({
+    name: file.name,
+    path: file.path,
+    length: file.length,
+    downloaded: file.downloaded,
+    progress: file.progress
+  }))
+}
+
 const cleanTorrents = (torrents) => {
   return torrents.map((torrent) => ({
     infoHash: torrent.infoHash,
     magnetURI: torrent.magnetURI,
-    files: torrent.files,
+    files: cleanFiles(torrent.files),
     timeRemaining: torrent.timeRemaining,
     received: torrent.received,
     downloaded: torrent.downloaded,
@@ -58,7 +68,7 @@ const add = (req, res) => {
   const { query: { magnet, path } } = req
 
   process.torrentClient.add(magnet, { path }, (torrent) => {
-    console.log('Added', torrent)
+    logger.info(`Added ${torrent.path}`)
   })
 
   logger.info(`Added magnet to torrent: ${magnet}`)

@@ -44,6 +44,9 @@ const createConfig = () => {
         fullscreen: false,
         preferredLanguage: 'en',
         quality: '720p'
+      },
+      client: {
+        path: join(BASE_PATH, 'Downloads')
       }
     }
   }
