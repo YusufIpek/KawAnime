@@ -1,7 +1,7 @@
-import {axios} from 'store/utils'
+import { axios } from 'store/utils'
 
 export default {
-  async getData ({commit}) {
+  async getData ({ commit }) {
     try {
       const { data: { client, torrents }, status } = await axios.get('torrent/info')
 
@@ -12,7 +12,7 @@ export default {
     } catch (e) { void e }
   },
 
-  async addTorrent ({state}, torrent) {
+  async addTorrent ({ state }, torrent) {
     // torrent should either be a object with a path and a torrent keys
     // or simply a torrent type to feed the client.
     const params = typeof torrent === 'object'
@@ -29,7 +29,7 @@ export default {
     }
   },
 
-  async toggle ({state}, params) {
+  async toggle ({ state }, params) {
     try {
       await this.$axios.get('torrent/toggle', {
         params
